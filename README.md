@@ -4,6 +4,12 @@ This is Sean Eron Anderson's [Bit Twiddling Hacks](https://graphics.stanford.edu
 collection, with every hack in one place, the bugs I found in it fixed, and
 six hacks swapped for cheaper versions.
 
+It covers the usual bit manipulation tricks in C: sign and abs without
+branches, popcount (counting set bits), parity, bit reversal, integer log2
+and log10, counting trailing zeros, rounding up to a power of 2, Morton codes
+(interleaved bits), finding zero bytes in a word, and the next permutation of
+a bit pattern.
+
 I ported all the hacks to Rust to benchmark them. Along the way I found 14
 bugs in the original C. A few give wrong answers, one reads past the end of
 an array, several are undefined behaviour that compilers are free to break,
@@ -11,8 +17,8 @@ and a handful only fail on some platforms. Separately, six hacks turned out to
 have versions that are better on every measure I tried. The short lists are
 below, followed by every hack in full.
 
-The code snippets on the original page are public domain. The explanations
-here are my own.
+The code snippets on the original page are public domain, and this version
+is too ([CC0](LICENSE)). The explanations here are my own.
 
 ## What changed
 
@@ -1457,3 +1463,7 @@ The collection is by Sean Eron Anderson
 (https://graphics.stanford.edu/~seander/bithacks.html), with contributions
 from many people credited on that page. The people named above are the ones
 the original credits for each technique.
+
+## License
+
+[CC0 1.0](LICENSE). Use the code and text however you like; no credit needed.
