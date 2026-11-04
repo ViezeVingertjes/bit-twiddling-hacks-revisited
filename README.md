@@ -75,6 +75,17 @@ for a single built-in instruction.
 Correctness was checked exhaustively over all 2^32 inputs, or with the z3
 solver for the 64-bit parity.
 
+A note on hardware. The operation counts hold on any machine, but the
+instruction counts and timings are for a current 64-bit x86 CPU, and that
+matters for the log2 and log10 versions. They rely on converting an integer
+to a `double` being cheap, which it is now (one instruction). The original
+builds the double through a union precisely because many CPUs back then were
+slow at this. Compiled for 32-bit x86 with SSE2, roughly a Pentium 4, the new
+log2 is 16 instructions against the original's 15. With the older x87 FPU
+it's 13 against 15. I haven't timed either on old hardware. The other four
+replacements don't depend on this: three are plain 32-bit integer code, and
+the 64-bit parity is compared with the original's own 64-bit version.
+
 Plenty of candidates had fewer operations but failed the other two tests.
 Usually a `%` by a constant was the culprit: it counts as one operation but
 compiles to five or so instructions. Or a shorter version just had a longer
